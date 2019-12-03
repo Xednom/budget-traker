@@ -25,7 +25,7 @@ SECRET_KEY = 'imbv)v&b-%wc&&mri3um()-6ehl^$ja1@zgyw1ng720zx15j0!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.pythonanywhere.com', '*']
 
 
 # Application definition
@@ -91,11 +91,16 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'budget',
-         'USER': 'root',
-         'PASSWORD': '22',
-         'HOST': 'localhost',
-         'PORT': '5432',
+        #  'NAME': 'budget',
+        #  'USER': 'root',
+        #  'PASSWORD': '22',
+        #  'HOST': 'localhost',
+        #  'PORT': '5432',
+         'NAME': 'mabtracker$budget',
+         'USER': 'mabtracker',
+         'PASSWORD': 'fishmond22',
+         'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
+         'PORT': '3306',
          'OPTIONS': {
              'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
          },
