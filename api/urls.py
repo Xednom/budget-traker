@@ -12,5 +12,6 @@ router.register(r'expenses', ExpenseTrackerViewSet)
 router.register(r'type_of_expenses', TypeOfExpensesViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('rest-auth/', include('rest_auth.urls')),
 ]
