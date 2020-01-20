@@ -9,7 +9,7 @@ from expenses.api.views import ExpenseTrackerViewSet, TypeOfExpensesViewSet
 router = DefaultRouter()
 
 router.register(r'user', UserViewSet)
-router.register(r'expenses', ExpenseTrackerViewSet)
+router.register(r'expenses', ExpenseTrackerViewSet, base_name='Expenses')
 router.register(r'type_of_expenses', TypeOfExpensesViewSet)
 
 urlpatterns = [
