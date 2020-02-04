@@ -49,7 +49,6 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     'users',
     'expenses',
-    'crispy_forms',
 ]
 
 THIRD_PARTY_APPS = [
@@ -59,6 +58,8 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
+    'crispy_forms',
+    'webpack_loader',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -86,18 +87,19 @@ REST_FRAMEWORK = {
     ],
 }
 
-CRISPY_TEMPLATE_PACK = "bootstrap4"
-
-AUTH_USER_MODEL = 'users.User'
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
+    }
+}
 
 ROOT_URLCONF = 'budget_tracker.urls'
-
-SITE_ID = 1
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -175,12 +177,28 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = (
-    os.path.join(BASE_DIR, 'staticfiles')
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "frontend/dist")
+]
+
+# STATIC_ROOT = "" 
+
+# Crispy forms - django_crispy_forms
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Custom User model
+AUTH_USER_MODEL = 'users.User'
+
+# django.contrib.sites
+SITE_ID = 1
