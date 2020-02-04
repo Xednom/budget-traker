@@ -1,0 +1,17 @@
+{% extends 'auth_layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card text-center">
+    <div class="card-header">
+      Login
+    </div>
+    <div class="card-body">
+      {{ forms|crispy }}
+
+      <button type="submit" class="btn btn-sm btn-primary">Login</button>
+    </div>
+</div>
+{% endblock %}
+

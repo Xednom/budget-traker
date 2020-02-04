@@ -49,6 +49,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     'users',
     'expenses',
+    'crispy_forms',
 ]
 
 THIRD_PARTY_APPS = [
@@ -84,6 +85,8 @@ REST_FRAMEWORK = {
 
     ],
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTH_USER_MODEL = 'users.User'
 

@@ -1,0 +1,16 @@
+{% extends 'auth_layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card text-center">
+    <div class="card-header">
+      Registration
+    </div>
+    <div class="card-body">
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-sm btn-primary">Create Account</button>
+    </div>
+</div>
+{% endblock %}
+
