@@ -8,12 +8,15 @@ from expenses.models import ExpenseTracker as expense, TypeOfExpenses as type_of
 
 
 class ExpenseTrackerViewSet(viewsets.ModelViewSet):
-    queryset = expense.objects.all()
     serializer_class = ExpenseTrackerSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        curret_user = expense.objects.filter(name=self.request.user)
+        expenses = expense.objects.all()
+        current_user = self.request.user
+        if expenses:
+            queryset = expenses.filter(name__username=current_user)
+            return queryset
 
 
 class TypeOfExpensesViewSet(viewsets.ModelViewSet):

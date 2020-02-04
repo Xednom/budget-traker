@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import logging
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+ROOT_DIR = environ.Path(__file__) - 2
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+env = environ.Env(DEBUG=(bool, False), ) # set default values and casting
+env_file = str(ROOT_DIR.path('.env'))
+env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -112,19 +118,24 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        #  'NAME': 'budget',
-        #  'USER': 'root',
-        #  'PASSWORD': '22',
-        #  'HOST': 'localhost',
-        #  'PORT': '5432',
-         'NAME': 'mabtracker$budget',
-         'USER': 'mabtracker',
-         'PASSWORD': 'fishmond22',
-         'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
-         'PORT': '3306',
-         'OPTIONS': {
-             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-         },
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
+        'OPTIONS': {
+         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+
+        # prod info
+        # 'NAME': 'mabtracker$budget',
+        # 'USER': 'mabtracker',
+        # 'PASSWORD': 'fishmond22',
+        # 'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
+        # 'PORT': '3306',
+        # 'OPTIONS': {
+        #  'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        # },
     }
 }
 
