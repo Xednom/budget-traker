@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ExpenseEditor from "../components/Expenses/ExpenseEditor.vue";
+import ExpenseAdd from "../components/Expenses/ExpenseAdd.vue";
 
 Vue.use(VueRouter);
 
@@ -13,9 +14,14 @@ const routes = [
   },
   {
     path: "/expenses/:id/",
-    name: "expenses",
+    name: "expenses.edit",
     component: ExpenseEditor,
     props: true
+  },
+  {
+    path: "/expenses/add/",
+    name: "expenses.add",
+    component: ExpenseAdd,
   },
   {
     path: "/about",

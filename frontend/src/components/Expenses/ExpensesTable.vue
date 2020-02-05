@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="mt-5">
+      <router-link :to="{ name: 'expenses.add' }">Add</router-link>
+    </div>
     <div class="card mt-5">
       <div class="card-header">Manage Expenses</div>
       <div class="card-body">
@@ -13,19 +16,19 @@
               <th scope="col">Budget</th>
             </tr>
           </thead>
-            <draggable v-model="items" tag="tbody">
+          <draggable v-model="items" tag="tbody">
             <tr v-for="item in items" :key="item.id">
-              <td> 
+              <td>
                 <router-link
-                    :to="{ name: 'expenses', params: { id: item.id } }"
-                >{{ item.name }}
-                </router-link></td>
+                  :to="{ name: 'expenses.edit', params: { id: item.id } }"
+                >{{ item.name }}</router-link>
+              </td>
               <td>{{ item.type_of_expenses }}</td>
               <td>{{ item.date }}</td>
               <td>{{ item.expenses }}</td>
               <td>{{ item.budgets }}</td>
             </tr>
-            </draggable>
+          </draggable>
         </table>
       </div>
     </div>
@@ -35,19 +38,19 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 
-import draggable from 'vuedraggable'
+import draggable from "vuedraggable";
 
 export default {
   name: "expenses-table",
   components: {
-      draggable
+    draggable
   },
   data() {
     return {
       items: [],
       currentItems: {},
       loading: false,
-      dragging: false,
+      dragging: false
     };
   },
   methods: {
@@ -62,7 +65,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     this.getExpenses();

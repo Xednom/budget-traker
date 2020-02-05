@@ -18,6 +18,10 @@ class ExpenseTrackerViewSet(viewsets.ModelViewSet):
             queryset = expenses.filter(name__username=current_user)
             return queryset
 
+    def perform_create(self, serializer):
+        current_user = self.request.user
+        return serializer.save(name=current_user)
+
 
 class TypeOfExpensesViewSet(viewsets.ModelViewSet):
     queryset = type_of_expenses.objects.all()
