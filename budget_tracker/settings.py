@@ -85,6 +85,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
     ],
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
 }
 
 WEBPACK_LOADER = {

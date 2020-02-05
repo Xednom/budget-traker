@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import ExpenseEditor from "../components/Expenses/ExpenseEditor.vue";
 
 Vue.use(VueRouter);
 
@@ -9,6 +10,12 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/expenses/:id/",
+    name: "expenses",
+    component: ExpenseEditor,
+    props: true
   },
   {
     path: "/about",
