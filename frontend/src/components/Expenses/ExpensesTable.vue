@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <draggable v-model="items" tag="tbody">
-            <tr v-for="item in items" :key="item.id">
+            <tr v-for="item in expenses" :key="item.id">
               <td>
                 <router-link
                   :to="{ name: 'expenses.edit', params: { id: item.id } }"
@@ -38,6 +38,8 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 
+import store from '@/store/store';
+
 import draggable from "vuedraggable";
 
 export default {
@@ -53,22 +55,14 @@ export default {
       dragging: false
     };
   },
-  methods: {
-    getExpenses() {
-      this.loading = true;
-      let endpoint = `/api/v1/expenses/`;
-      apiService(endpoint)
-        .then(data => {
-          this.items.push(...data);
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+  methods: {},
+  computed: {
+    expenses() {
+      return this.$store.state.expenses;
     }
   },
   created() {
-    this.getExpenses();
+    this.$store.dispatch('loadExpenses');
   }
 };
 </script>
