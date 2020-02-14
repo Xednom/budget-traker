@@ -16,19 +16,15 @@
               <th scope="col">Budget</th>
             </tr>
           </thead>
-          <draggable v-model="items" tag="tbody">
-            <tr v-for="item in expenses" :key="item.id">
-              <td>
-                <router-link
-                  :to="{ name: 'expenses.edit', params: { id: item.id } }"
-                >{{ item.name }}</router-link>
-              </td>
-              <td>{{ item.type_of_expenses }}</td>
-              <td>{{ item.date }}</td>
-              <td>{{ item.expenses }}</td>
-              <td>{{ item.budgets }}</td>
-            </tr>
-          </draggable>
+          <tr v-for="item in expenses.expenses" :key="item.id">
+            <td>
+              <router-link :to="{ name: 'expenses.edit', params: { id: item.id } }">{{ item.name }}</router-link>
+            </td>
+            <td>{{ item.type_of_expenses }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.expenses }}</td>
+            <td>{{ item.budgets }}</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -36,33 +32,14 @@
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
-
-import store from '@/store/store';
-
-import draggable from "vuedraggable";
+import { mapState } from "vuex";
 
 export default {
   name: "expenses-table",
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      items: [],
-      currentItems: {},
-      loading: false,
-      dragging: false
-    };
-  },
   methods: {},
-  computed: {
-    expenses() {
-      return this.$store.state.expenses;
-    }
-  },
+  computed: mapState(['expenses']),
   created() {
-    this.$store.dispatch('loadExpenses');
+    this.$store.dispatch("loadExpenses");
   }
 };
 </script>
