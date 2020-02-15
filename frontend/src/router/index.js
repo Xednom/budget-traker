@@ -21,7 +21,7 @@ const routes = [
   {
     path: "/expenses/add/",
     name: "expenses.add",
-    component: ExpenseAdd,
+    component: ExpenseAdd
   },
   {
     path: "/about",

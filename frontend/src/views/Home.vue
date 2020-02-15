@@ -10,7 +10,7 @@ import ExpensesTable from "@/components/Expenses/ExpensesTable.vue";
 export default {
   name: "home",
   components: {
-    ExpensesTable,
+    ExpensesTable
   }
 };
 </script>

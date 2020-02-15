@@ -19,7 +19,10 @@
           <tbody v-if="!loading">
             <tr v-for="item in expenses" :key="item.id">
               <td>
-                <router-link :to="{ name: 'expenses.edit', params: { id: item.id } }">{{ item.name }}</router-link>
+                <router-link
+                  :to="{ name: 'expenses.edit', params: { id: item.id } }"
+                  >{{ item.name }}</router-link
+                >
               </td>
               <td>{{ item.type_of_expenses }}</td>
               <td>{{ item.date }}</td>
@@ -41,13 +44,13 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { FETCH_EXPENSES } from '@/store/actions.type';
+import { FETCH_EXPENSES } from "@/store/actions.type";
 
 export default {
   name: "expenses-table",
   methods: {},
   computed: {
-    ...mapGetters(['expenses', 'current_expense', 'loading'])
+    ...mapGetters(["expenses", "current_expense", "loading"])
   },
   mounted() {
     this.$store.dispatch(FETCH_EXPENSES);

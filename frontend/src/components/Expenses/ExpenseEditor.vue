@@ -21,20 +21,31 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Name</label>
-                <input type="text" class="form-control" disabled v-model="expense.name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  v-model="expense.name"
+                />
               </div>
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Type of Expenses</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                    <label class="input-group-text" for="inputGroupSelect01"
+                      >Options</label
+                    >
                   </div>
                   <select
                     class="custom-select"
                     id="inputGroupSelect01"
                     v-model="expense.type_of_expenses"
                   >
-                    <option v-for="expense in type_of_expenses" :key="expense.id">{{ expense.name }}</option>
+                    <option
+                      v-for="expense in type_of_expenses"
+                      :key="expense.id"
+                      >{{ expense.name }}</option
+                    >
                   </select>
                 </div>
               </div>
@@ -42,15 +53,29 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Expenses</label>
-                <input type="text" class="form-control" v-model="expense.expenses" />
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="expense.expenses"
+                />
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Budget</label>
-                <input type="text" class="form-control" v-model="expense.budgets" />
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="expense.budgets"
+                />
               </div>
             </div>
             <button type="submit" class="btn btn-info">Update</button>
-            <button type="submit" class="btn btn-danger ml-2" @click="deleteExpense">Delete</button>
+            <button
+              type="submit"
+              class="btn btn-danger ml-2"
+              @click="deleteExpense"
+            >
+              Delete
+            </button>
           </form>
         </div>
       </div>
@@ -99,22 +124,23 @@ export default {
     deleteExpense() {
       let endpoint = `/api/v1/expenses/${this.id}/`;
       let method = "DELETE";
-      apiService(endpoint, method).then(() =>{
-        this.$router.push({
-          name: "home"
-        })
-        .catch(err =>{
-          console.log(err);
-        });
-      })
+      apiService(endpoint, method).then(() => {
+        this.$router
+          .push({
+            name: "home"
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
     }
   },
   computed: {
-    ...mapGetters(['expense', 'type_of_expenses', 'loading'])
+    ...mapGetters(["expense", "type_of_expenses", "loading"])
   },
   mounted() {
     this.$store.dispatch(FETCH_AN_EXPENSE, this.$route.params.id);
     this.$store.dispatch(FETCH_TYPE_EXPENSES);
-  },
+  }
 };
 </script>
