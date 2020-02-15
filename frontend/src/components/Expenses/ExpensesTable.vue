@@ -16,19 +16,15 @@
               <th scope="col">Budget</th>
             </tr>
           </thead>
-          <draggable v-model="items" tag="tbody">
-            <tr v-for="item in items" :key="item.id">
-              <td>
-                <router-link
-                  :to="{ name: 'expenses.edit', params: { id: item.id } }"
-                >{{ item.name }}</router-link>
-              </td>
-              <td>{{ item.type_of_expenses }}</td>
-              <td>{{ item.date }}</td>
-              <td>{{ item.expenses }}</td>
-              <td>{{ item.budgets }}</td>
-            </tr>
-          </draggable>
+          <tr v-for="item in expenses.expenses" :key="item.id">
+            <td>
+              <router-link :to="{ name: 'expenses.edit', params: { id: item.id } }">{{ item.name }}</router-link>
+            </td>
+            <td>{{ item.type_of_expenses }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.expenses }}</td>
+            <td>{{ item.budgets }}</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -36,39 +32,14 @@
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
-
-import draggable from "vuedraggable";
+import { mapState } from "vuex";
 
 export default {
   name: "expenses-table",
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      items: [],
-      currentItems: {},
-      loading: false,
-      dragging: false
-    };
-  },
-  methods: {
-    getExpenses() {
-      this.loading = true;
-      let endpoint = `/api/v1/expenses/`;
-      apiService(endpoint)
-        .then(data => {
-          this.items.push(...data);
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  },
+  methods: {},
+  computed: mapState(['expenses']),
   created() {
-    this.getExpenses();
+    this.$store.dispatch("loadExpenses");
   }
 };
 </script>
