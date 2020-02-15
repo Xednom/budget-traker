@@ -16,7 +16,7 @@
                   <label class="input-group-text" for="inputGroupSelect01">Options</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" v-model="newExpense.type_of_expenses">
-                  <option v-for="expense in expenses" :key="expense.id">{{ expense.name }}</option>
+                  <option v-for="expense in type_of_expenses" :key="expense.id">{{ expense.name }}</option>
                 </select>
               </div>
             </div>
@@ -40,6 +40,9 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+
+import { mapGetters} from "vuex";
+import { FETCH_TYPE_EXPENSES } from "@/store/actions.type";
 
 export default {
   name: "ExpenseAdd",
@@ -90,8 +93,11 @@ export default {
         });
     }
   },
-  created() {
-    this.getListExpenses();
+  computed: {
+    ...mapGetters(['type_of_expenses', 'loading'])
+  },
+  mounted() {
+    this.$store.dispatch(FETCH_TYPE_EXPENSES);
   }
 };
 </script>

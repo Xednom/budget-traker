@@ -16,15 +16,22 @@
               <th scope="col">Budget</th>
             </tr>
           </thead>
-          <tr v-for="item in expenses.expenses" :key="item.id">
-            <td>
-              <router-link :to="{ name: 'expenses.edit', params: { id: item.id } }">{{ item.name }}</router-link>
-            </td>
-            <td>{{ item.type_of_expenses }}</td>
-            <td>{{ item.date }}</td>
-            <td>{{ item.expenses }}</td>
-            <td>{{ item.budgets }}</td>
-          </tr>
+          <tbody v-if="!loading">
+            <tr v-for="item in expenses" :key="item.id">
+              <td>
+                <router-link :to="{ name: 'expenses.edit', params: { id: item.id } }">{{ item.name }}</router-link>
+              </td>
+              <td>{{ item.type_of_expenses }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.expenses }}</td>
+              <td>{{ item.budgets }}</td>
+            </tr>
+          </tbody>
+          <tbody v-else>
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </tbody>
         </table>
       </div>
     </div>
@@ -32,14 +39,18 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+
+import { FETCH_EXPENSES, FETCH_START, FETCH_END } from '@/store/actions.type';
 
 export default {
   name: "expenses-table",
   methods: {},
-  computed: mapState(['expenses']),
-  created() {
-    this.$store.dispatch("loadExpenses");
+  computed: {
+    ...mapGetters(['expenses', 'current_expense', 'loading'])
+  },
+  mounted() {
+    this.$store.dispatch(FETCH_EXPENSES, FETCH_START, FETCH_END);
   }
 };
 </script>
