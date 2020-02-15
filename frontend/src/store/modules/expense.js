@@ -25,7 +25,7 @@ const getters = {
   expenses: state => {
     return state.expenses;
   },
-  current_expense: state => {
+  expense: state => {
     return state.expense;
   },
   type_of_expenses: state => {
@@ -84,10 +84,10 @@ const actions = {
         console.log(err);
       });
   },
-  [FETCH_AN_EXPENSE] (commit, payload) {
+  [FETCH_AN_EXPENSE] ({ commit }, payload) {
     commit(FETCH_START)
-    const {expense_id} = payload;
-    let endpoint = `/api/v1/expenses/${expense_id}`;
+    const expense_id = payload
+    let endpoint = `/api/v1/expenses/${expense_id}/`;
     apiService(endpoint)
       .then(data => {
         commit(SET_AN_EXPENSE, data)

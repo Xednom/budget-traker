@@ -14,14 +14,14 @@
       <div class="card mt-5">
         <div class="card-header">
           Edit
-          <strong>{{ item.name }}</strong> records
+          <strong>{{ expense.name }}</strong> records
         </div>
         <div class="card-body">
           <form @submit.prevent="onSubmit">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Name</label>
-                <input type="text" class="form-control" disabled v-model="item.name" />
+                <input type="text" class="form-control" disabled v-model="expense.name" />
               </div>
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Type of Expenses</label>
@@ -32,9 +32,9 @@
                   <select
                     class="custom-select"
                     id="inputGroupSelect01"
-                    v-model="item.type_of_expenses"
+                    v-model="expense.type_of_expenses"
                   >
-                    <option v-for="expense in expenses" :key="expense.id">{{ expense.name }}</option>
+                    <option v-for="expense in type_of_expenses" :key="expense.id">{{ expense.name }}</option>
                   </select>
                 </div>
               </div>
@@ -42,11 +42,11 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Expenses</label>
-                <input type="text" class="form-control" v-model="item.expenses" />
+                <input type="text" class="form-control" v-model="expense.expenses" />
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Budget</label>
-                <input type="text" class="form-control" v-model="item.budgets" />
+                <input type="text" class="form-control" v-model="expense.budgets" />
               </div>
             </div>
             <button type="submit" class="btn btn-info">Update</button>
@@ -61,6 +61,9 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 
+import { mapGetters } from "vuex";
+import { FETCH_AN_EXPENSE, FETCH_TYPE_EXPENSES } from "@/store/actions.type";
+
 export default {
   name: "ExpenseEditor",
   props: {
@@ -69,41 +72,22 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      item: {},
-      expenses: {},
-      loading: false
-    };
-  },
   methods: {
-    viewExpenses() {
-      this.loading = true;
-      let endpoint = `/api/v1/expenses/${this.id}/`;
-      apiService(endpoint)
-        .then(data => {
-          this.item = data;
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
     onSubmit() {
-      if (!this.item.expenses) {
+      if (!this.expense.expenses) {
         this.error = "You can't leave an empty expenses!";
-      } else if (!this.item.budgets) {
+      } else if (!this.expense.budgets) {
         this.error = "Can't leave the budget field empty!";
       } else {
         this.loading = true;
         let endpoint = `/api/v1/expenses/${this.id}/`;
         let method = "PUT";
-        apiService(endpoint, method, this.item)
-          .then(item => {
+        apiService(endpoint, method, this.expense)
+          .then(expense => {
             this.loading = false;
             this.$router.push({
               name: "expenses.edit",
-              params: { id: item.id }
+              params: { id: expense.id }
             });
             this.viewExpenses();
           })
@@ -123,23 +107,14 @@ export default {
           console.log(err);
         });
       })
-    },
-    getListExpenses() {
-      this.loading = true;
-      let endpoint = `/api/v1/type_of_expenses/`;
-      apiService(endpoint)
-        .then(data => {
-          this.expenses = data;
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
     }
   },
-  created() {
-    this.viewExpenses();
-    this.getListExpenses();
-  }
+  computed: {
+    ...mapGetters(['expense', 'type_of_expenses', 'loading'])
+  },
+  mounted() {
+    this.$store.dispatch(FETCH_AN_EXPENSE, this.$route.params.id);
+    this.$store.dispatch(FETCH_TYPE_EXPENSES);
+  },
 };
 </script>

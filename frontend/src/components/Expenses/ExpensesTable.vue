@@ -41,7 +41,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { FETCH_EXPENSES, FETCH_START, FETCH_END } from '@/store/actions.type';
+import { FETCH_EXPENSES } from '@/store/actions.type';
 
 export default {
   name: "expenses-table",
@@ -50,7 +50,7 @@ export default {
     ...mapGetters(['expenses', 'current_expense', 'loading'])
   },
   mounted() {
-    this.$store.dispatch(FETCH_EXPENSES, FETCH_START, FETCH_END);
+    this.$store.dispatch(FETCH_EXPENSES);
   }
 };
 </script>

@@ -80,18 +80,6 @@ export default {
           console.log(err);
         });
     },
-    getListExpenses() {
-      this.loading = true;
-      let endpoint = `/api/v1/type_of_expenses/`;
-      apiService(endpoint)
-        .then(data => {
-          this.expenses = data;
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
   },
   computed: {
     ...mapGetters(['type_of_expenses', 'loading'])
