@@ -29,7 +29,7 @@ env.read_env(env_file)
 SECRET_KEY = 'imbv)v&b-%wc&&mri3um()-6ehl^$ja1@zgyw1ng720zx15j0!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.pythonanywhere.com', '*']
 
@@ -124,24 +124,24 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
-        'OPTIONS': {
-         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-
-        # prod info
-        # 'NAME': 'mabtracker$budget',
-        # 'USER': 'mabtracker',
-        # 'PASSWORD': 'fishmond22',
-        # 'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
-        # 'PORT': '3306',
+        # 'NAME': env('DATABASE_NAME'),
+        # 'USER': env('DATABASE_USER'),
+        # 'PASSWORD': env('DATABASE_PASSWORD'),
+        # 'HOST': env('DATABASE_HOST'),
+        # 'PORT': env('DATABASE_PORT'),
         # 'OPTIONS': {
         #  'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         # },
+
+        # prod info
+        'NAME': 'mabtracker$budget',
+        'USER': 'mabtracker',
+        'PASSWORD': 'fishmond22',
+        'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+        'OPTIONS': {
+         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -193,7 +193,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/dist")
 ]
 
-# STATIC_ROOT = "" 
+STATIC_ROOT = (
+    os.path.join(ROOT_DIR, 'staticfiles')
+)
 
 # Crispy forms - django_crispy_forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"
