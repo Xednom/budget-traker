@@ -68,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 REST_FRAMEWORK = {
@@ -161,6 +162,11 @@ STATICFILES_DIRS = [
 STATIC_ROOT = (
     os.path.join(ROOT_DIR, 'staticfiles')
 )
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Crispy forms - django_crispy_forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"
