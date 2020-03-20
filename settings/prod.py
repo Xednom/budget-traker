@@ -1,4 +1,4 @@
-from base import * 
+from .base import * 
 
 DEBUG = False
 
@@ -9,7 +9,7 @@ ALLOWED_HOSTS = ['.pythonanywhere.com']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mabtracker$budget',
         'USER': 'mabtracker',
         'PASSWORD': 'fishmond22',
@@ -45,3 +45,10 @@ SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
+
+
+
+# DATABASE_URL = os.environ['DATABASE_URL']
+
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import logging
 import environ
+import psycopg2
+import dj_database_url
 
 
 ROOT_DIR = environ.Path(__file__) - 2
