@@ -10,14 +10,11 @@ ALLOWED_HOSTS = ['.pythonanywhere.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mabtracker$budget',
-        'USER': 'mabtracker',
-        'PASSWORD': 'fishmond22',
-        'HOST': 'mabtracker.mysql.pythonanywhere-services.com',
-        'PORT': '3306',
-        'OPTIONS': {
-         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'NAME': 'd63f7luvevhghb',
+        'USER': 'tnyyrlaxfryaom',
+        'PASSWORD': '685a83048898676366f5a789ef0a14c521bcbefc7954e39e2b722cfcd1a65358',
+        'HOST': 'ec2-54-197-48-79.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
