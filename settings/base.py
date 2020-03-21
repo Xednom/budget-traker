@@ -156,7 +156,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "assets"),
-    os.path.join(BASE_DIR, "frontend/dist")
+    os.path.join(BASE_DIR, "frontend/dist/"),
+    os.path.join(BASE_DIR, "frontend/public/")
 ]
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
