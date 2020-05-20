@@ -17,36 +17,20 @@
                     >Options</label
                   >
                 </div>
-                <select
-                  class="custom-select"
-                  id="inputGroupSelect01"
-                  v-model="newExpense.type_of_expenses"
-                >
-                  <option
-                    v-for="expense in type_of_expenses"
-                    :key="expense.id"
-                    >{{ expense.name }}</option
-                  >
-                </select>
+                <select-option v-model="newExpense.type_of_expenses"
+                  :items="type_of_expenses">
+                </select-option>
               </div>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail4">Expenses</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="newExpense.expenses"
-              />
+              <number-field v-model="newExpense.expenses"></number-field>
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Budget</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="newExpense.budgets"
-              />
+              <number-field v-model="newExpense.budgets"></number-field>
             </div>
           </div>
           <button type="submit" class="btn btn-success">Add</button>
@@ -62,9 +46,14 @@ import { apiService } from "@/common/api.service.js";
 import { mapGetters } from "vuex";
 import { FETCH_TYPE_EXPENSES } from "@/store/actions.type";
 
+import SelectOption from "@/components/Forms/SelectOption.vue";
+import NumberField from "@/components/Forms/NumberField.vue";
+
 export default {
   name: "ExpenseAdd",
-
+  components: {
+    SelectOption, NumberField
+  },
   data() {
     return {
       saving: false,

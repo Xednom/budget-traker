@@ -53,19 +53,11 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Expenses</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="expense.expenses"
-                />
+                <number-field v-model="expense.expenses"></number-field>
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Budget</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="expense.budgets"
-                />
+                <number-field v-model="expense.budgets"></number-field>
               </div>
             </div>
             <button type="submit" class="btn btn-info">Update</button>
@@ -89,8 +81,14 @@ import { apiService } from "@/common/api.service.js";
 import { mapGetters } from "vuex";
 import { FETCH_AN_EXPENSE, FETCH_TYPE_EXPENSES } from "@/store/actions.type";
 
+import SelectOption from "@/components/Forms/SelectOption.vue";
+import NumberField from "@/components/Forms/NumberField.vue";
+
 export default {
   name: "ExpenseEditor",
+  components: {
+    NumberField
+  },
   props: {
     id: {
       type: String,
