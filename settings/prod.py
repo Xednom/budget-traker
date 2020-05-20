@@ -80,10 +80,10 @@ LOGGING = {
 }
 
 # see https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATIC_ROOT = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles'),
     os.path.join(BASE_DIR, 'frontend/dist')
-)
+]
 
 # SSL/TLS SETTINGS FOR DJANGO
 CORS_REPLACE_HTTPS_REFERER = True
