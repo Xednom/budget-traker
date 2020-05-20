@@ -10,10 +10,10 @@ ALLOWED_HOSTS = ['.herokuapp.com', '.pythonanywhere.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6rlu2380djf5',
-        'USER': 'tbcdgzqqhxeizc ',
-        'PASSWORD': '5955ea9a7e8402fbac58600856aeabb479459595a7956672b2a1a9bc17ddfa13',
-        'HOST': 'ec2-46-137-84-140.eu-west-1.compute.amazonaws.com',
+        'NAME': 'dacb2mrpfbj0an',
+        'USER': 'xascfmypogaajd ',
+        'PASSWORD': 'c62aa9b963403fe109eaf936b4cb2b133f6fc18fe77de44b17f16c7bd31dfec0',
+        'HOST': 'ec2-34-232-147-86.compute-1.amazonaws.com',
         'PORT': '5432',
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'mabtracker$budget',
