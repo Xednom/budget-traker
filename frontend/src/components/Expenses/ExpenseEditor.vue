@@ -36,17 +36,8 @@
                       >Options</label
                     >
                   </div>
-                  <select
-                    class="custom-select"
-                    id="inputGroupSelect01"
-                    v-model="expense.type_of_expenses"
-                  >
-                    <option
-                      v-for="expense in type_of_expenses"
-                      :key="expense.id"
-                      >{{ expense.name }}</option
-                    >
-                  </select>
+                  <select-option v-model="expense.type_of_expenses"
+                    :items="type_of_expenses"></select-option>
                 </div>
               </div>
             </div>
@@ -87,7 +78,7 @@ import NumberField from "@/components/Forms/NumberField.vue";
 export default {
   name: "ExpenseEditor",
   components: {
-    NumberField
+    NumberField, SelectOption
   },
   props: {
     id: {
